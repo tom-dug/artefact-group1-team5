@@ -1,0 +1,8 @@
+venv/
+web/__pycache__/
+controle/__pycache__/
+batterie/__pycache__/
+camera/__pycache__/
+tests/__pycache__/
+__pycache__/
+.Trash-1000/

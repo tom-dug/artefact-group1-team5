@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>RPI15</title>
+<meta charset="utf-8">
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+
+<body>
+
+<h1>RPI Groupe 1 Equipe 5 - Interface web</h1>
+
+<p>
+  <table style="table-layout: fixed; width: 1500px;">
+    <colgroup>
+      <col style="width: 500px;">
+      <col style="width: 500px;">
+      <col style="width: 500px;">
+    </colgroup>
+
+      <tr>
+        <td style="vertical-align: top;">
+
+          <h3>Keypad de contrôle manuel</h3>
+
+          <p>
+            <table>
+              <tr>
+              <td><button onclick="sendCommand('start_boost')" type="button">😈</button></td>
+              <td><button onclick="sendCommand('end_boost')" type="button">😇</button></td>
+              <td>
+                <table>
+                    <tr>
+                    <td></td>
+                    <td><button onclick="sendAsyncCommand('forward')" type="button">⬆️</button></td>
+                    <td></td>
+                    </tr>
+                    <td><button onclick="sendAsyncCommand('left')" type="button">⬅️</button></td>
+                    <td><button onclick="sendAsyncCommand('backward')" type="button">⬇️</button></td>
+                    <td><button onclick="sendAsyncCommand('right')" type="button">➡️</button></td>
+                </table>
+              </td>
+              </tr>
+            </table>
+          </p>
+
+          <h3>Maestro et stratégie</h3>
+
+          <button onclick="sendAsyncCommand('lancer_puppet')" type="button">
+            Lancer le puppet
+          </button>
+
+          <button onclick="sendAsyncCommand('lancer_strategie')" type="button">
+            Lancer la strategie
+          </button>
+
+          <h3>Tests</h3>
+
+          <button onclick="sendAsyncCommand('test_controle')" type="button">
+            Test controle
+          </button>
+          <!--
+          <button>
+            Test camera
+          </button>
+          -->
+          <button>
+            Test serveur de suivi
+          </button>
+
+          <h3>Boucles asynchrônes</h3>
+
+          <button onclick="sendCommand('activate_status_upd')" type="button">
+            Activer update status regulier
+          </button>
+
+          <button onclick="sendCommand('activate_send_pos')" type="button">
+            Activer l'envoi de la position au serveur
+          </button>
+
+          <h3>Calibration et ajustements</h3>
+
+          <p>
+          <button onclick="sendCommand('increase_calibrage_ar')" type="button">Augmenter ticks/cm A/R</button>
+          <button onclick="sendCommand('decrease_calibrage_ar')" type="button">Baisser ticks/cm A/R</button>
+          </p>
+
+          <p>
+          <button onclick="sendCommand('increase_calibrage_gd')" type="button">Augmenter ticks/rad G/D</button>
+          <button onclick="sendCommand('decrease_calibrage_gd')" type="button">Baisser ticks/rad G/D</button>
+          </p>
+
+          <p>
+          <button onclick="sendCommand('increase_ratio')" type="button">Augmenter ratio G/D</button>
+          <button onclick="sendCommand('decrease_ratio')" type="button">Baisser ratio G/D</button>
+          </p>
+
+          <h3>Batterie</h3>
+
+          <button onclick="refreshBattery()" type="button">Actualiser la batterie</button>
+
+          <footer id="battery">□□□□□□□□□□<br>Niveau : ?<br>Consommation : ?</footer>
+
+        </td>
+        <td style="vertical-align: top;">
+
+          <h3>Informations du robot</h3>
+
+          <p id="status">
+            x: ?<br>
+            y: ?<br>
+            dir: ?<br>
+            v_ar: ?<br>
+            v_gd: ?<br>
+            ticks_par_cm: ?<br>
+            ticks_par_rad: ?<br>
+            v_gauche_avance: ?<br>
+            v_droite_avance: ?<br>
+            v_gauche_tourne: ?<br>
+            v_droite_tourne: ?<br>
+            block: ?<br>
+            mode_auto: ?<br>
+            ratio_v_roues: ?
+          </p>
+
+          <table>
+            <tr>
+              <td>
+                <h3>Minimap</h3>
+                <canvas id="minimap" width="200" height="200" style="border:2px solid #333; background:#f0f0f0;">
+                </canvas>
+              </td>
+              <!--
+              <td>
+                <h3>Video feed</h3>
+                <img src="/video_feed" height="200">
+              <td>
+              -->
+            </tr>
+          </table>
+
+        </td>
+        <td style="vertical-align: top;">
+
+          <h3>Console</h3>
+
+          <p id="console"></p>
+          
+        </td>
+      </tr>
+  </table>
+</p>
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>
